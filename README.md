@@ -1,6 +1,6 @@
 # Convertator
 
-Rate exchange calculator written in Ruby.
+Rate exchange converter.
 
 ## Usage
 

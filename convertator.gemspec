@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Ivan Zinovyev']
   spec.email         = ['vanyazin@gmail.com']
 
-  spec.summary       = %q{Simple rate convertor}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Rate exchange converter}
+  spec.homepage      = "https://github.com/zinovyev"
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
