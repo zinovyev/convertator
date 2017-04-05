@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['vanyazin@gmail.com']
 
   spec.summary       = %q{Rate exchange converter}
-  spec.homepage      = "https://github.com/zinovyev"
+  spec.homepage      = "https://github.com/zinovyev/convertator"
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|

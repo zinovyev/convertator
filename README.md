@@ -1,6 +1,8 @@
 # Convertator
 
-Rate exchange converter.
+A simple rate exchange converter.
+
+[![Gem Version](https://badge.fury.io/rb/convertator.svg)](https://badge.fury.io/rb/convertator)
 
 ## Usage
 
