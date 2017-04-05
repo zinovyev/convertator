@@ -1,4 +1,5 @@
-require 'pry'
+require 'bigdecimal'
+require 'bigdecimal/util'
 
 module Convertator
   class Convertor
@@ -6,8 +7,9 @@ module Convertator
 
     attr_reader :provider
 
-    def initialize(provider = :cbr)
+    def initialize(provider = :cbr, accuracy = 10)
       @provider = load_provider(provider)
+      @accuracy = accuracy
     end
 
     def rates
@@ -17,15 +19,19 @@ module Convertator
     def rate(currency)
       currency = normalize_currency(currency)
       raise UnknownCurrencyError unless rates[currency]
-      rates[currency] 
+      BigDecimal.new(rates[currency], @accuracy)
     end
 
     def ratio(currency_from, currency_to)
-      rate(currency_from).to_f / rate(currency_to).to_f
+      rate(currency_to) / rate(currency_from)
     end
 
     def convert(amount, currency_from, currency_to)
       amount * ratio(currency_from, currency_to)
+    end
+
+    def convert_to_digits(amount, currency_from, currency_to)
+      convert(amount, currency_from, currency_to).to_digits
     end
 
     private

@@ -1,5 +1,4 @@
 require 'net/http'
-require 'pry'
 require 'rexml/document'
 
 module Convertator
