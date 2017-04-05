@@ -1,8 +1,12 @@
 require 'spec_helper'
-require 'convertator/convertor'
+require 'convertator/converter'
 require 'convertator/providers/static_provider'
 
-RSpec.describe Convertator::Convertor do
+RSpec.describe Convertator::Converter do
+  def expect_d(value)
+    expect(value.to_digits) 
+  end
+
   context 'with given rates' do
     let!(:rates) do
       {
@@ -14,9 +18,9 @@ RSpec.describe Convertator::Convertor do
     end
   
     subject do
-      convertor = Convertator::Convertor.new(:static)
-      convertor.provider.rates = rates
-      convertor
+      converter = Convertator::Converter.new(:static, 7)
+      converter.provider.rates = rates
+      converter
     end
 
     it 'returns rates' do
@@ -24,26 +28,26 @@ RSpec.describe Convertator::Convertor do
     end
 
     it 'returns particular rate' do
-      expect(subject.rate(:GBP)).to eq 33.3669_826
+      expect_d(subject.rate(:GBP)).to eq "33.36698"
     end
 
     it 'counts a valid ratio' do
-      expect(subject.ratio(:GBP, :AMD)).to eq 0.47123977070955286
+      expect_d(subject.ratio(:GBP, :AMD)).to eq "0.471239701379005776421787678"
     end
 
     it 'converts value from one currecy to another' do
-      expect(subject.convert(100, :GBP, :AMD)).to eq 47.123977070955284
+      expect_d(subject.convert(100, :GBP, :AMD)).to eq "212.206229032414680621"
     end
   end
 
   context 'without rates' do
     subject do
-      Convertator::Convertor.new(:static)
+      Convertator::Converter.new(:static)
     end
 
     it 'raises error if currency was not found' do
       expect { subject.rate(:GBP) }.to raise_error(
-        Convertator::Convertor::UnknownCurrencyError
+        Convertator::Converter::UnknownCurrencyError
       )
     end
 

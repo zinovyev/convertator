@@ -5,12 +5,12 @@ Rate exchange calculator written in Ruby.
 ## Usage
 
 ```ruby
-require 'convertator/convertor'
+require 'convertator/converter'
 
-convertor = Convertator::Convertor.new
-convertor.convert(100, :RUB, :USD)
+converter = Convertator::Converter.new
+converter.convert(100, :RUB, :USD)
 => 0.55e4
-convertor.convert_to_digits(100, :RUB, :USD)
+converter.convert_digits(100, :RUB, :USD)
 => "5500.0"
 ```
 

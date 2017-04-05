@@ -2,7 +2,7 @@ require 'bigdecimal'
 require 'bigdecimal/util'
 
 module Convertator
-  class Convertor
+  class Converter
     class UnknownCurrencyError < StandardError; end
 
     attr_reader :provider
@@ -23,14 +23,14 @@ module Convertator
     end
 
     def ratio(currency_from, currency_to)
-      rate(currency_to) / rate(currency_from)
+      rate(currency_from) / rate(currency_to)
     end
 
     def convert(amount, currency_from, currency_to)
-      amount * ratio(currency_from, currency_to)
+      amount / ratio(currency_from, currency_to)
     end
 
-    def convert_to_digits(amount, currency_from, currency_to)
+    def convert_digits(amount, currency_from, currency_to)
       convert(amount, currency_from, currency_to).to_digits
     end
 
