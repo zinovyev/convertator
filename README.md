@@ -1,10 +1,13 @@
 # Convertator
 
-A simple rate exchange converter.
+A simple currency converter which can use different sources to fetch rates and provides a rack-like middleware feature.
 
 [![Gem Version](https://badge.fury.io/rb/convertator.svg)](https://badge.fury.io/rb/convertator)
 
 ## Usage
+
+
+**Simple example**
 
 ```ruby
 require 'convertator/converter'
@@ -14,6 +17,21 @@ converter.convert(100, :RUB, :USD)
 => 0.55e4
 converter.convert_digits(100, :RUB, :USD)
 => "5500.0"
+```
+
+
+**Multi convertion**
+
+```ruby
+Convertator::Converter.new.convert_multi_s(100, :GBP, [:AMD, :RUB, :GBP])
+=> ["15.7142857144", "1.4285714286", "100.0"]
+```
+
+
+**Define accuracy and handler**
+
+```ruby
+Convertator::Converter.new(:static, 7)
 ```
 
 ## Installation

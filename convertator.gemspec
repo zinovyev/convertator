@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Ivan Zinovyev']
   spec.email         = ['vanyazin@gmail.com']
 
-  spec.summary       = %q{Rate exchange converter}
+  spec.summary       = %q{Simple currency converter}
   spec.homepage      = "https://github.com/zinovyev/convertator"
   spec.license       = 'MIT'
 

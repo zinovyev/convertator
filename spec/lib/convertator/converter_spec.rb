@@ -41,7 +41,9 @@ RSpec.describe Convertator::Converter do
     end
 
     it 'converts multiple rates' do
-      expect(subject.convert_multi_s(100, :GBP, [:AMD, :RUR, :GBP])).to eq ["212.2061846", "2.9969746", "100.0"]
+      expect(subject.convert_multi_s(100, :GBP, [:AMD, :RUR, :GBP])).to eq(
+        ["212.2061846", "2.9969746", "100.0"]
+      )
     end
   end
 

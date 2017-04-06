@@ -18,7 +18,7 @@ module Convertator
 
     def rate(currency)
       currency = normalize_currency(currency)
-      raise UnknownCurrencyError unless rates[currency]
+      raise UnknownCurrencyError "Currency #{currency} is unknown" unless rates[currency]
       round(BigDecimal.new(rates[currency], @accuracy))
     end
 
