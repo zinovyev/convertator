@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'convertator/converter'
+require 'convertator/middleware'
 require 'convertator/providers/static_provider'
 
 RSpec.describe Convertator::Converter do

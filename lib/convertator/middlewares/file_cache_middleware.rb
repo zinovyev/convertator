@@ -11,10 +11,14 @@ module Convertator
       def call
         @file.flock(::File::LOCK_EX)
         if @ttl < last_change
+          data = @prev.call
           @file.rewind
-          @file.write @prev.call
+          @file.write data
+        else
+          data = @file.read
         end
         @file.flock(::File::LOCK_UN)
+        data
       end
 
       private
