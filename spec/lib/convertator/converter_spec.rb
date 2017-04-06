@@ -10,10 +10,11 @@ RSpec.describe Convertator::Converter do
   context 'with given rates' do
     let!(:rates) do
       {
-        AUD: 036,
-        AZN: 43.6748_944,
-        GBP: 33.3669_826,
-        AMD: 70.8068_051 
+        RUR: "1",
+        AUD: "36",
+        AZN: "43.6748_944",
+        GBP: "33.3669_8265",
+        AMD: "70.8068_051"
       }
     end
   
@@ -28,15 +29,19 @@ RSpec.describe Convertator::Converter do
     end
 
     it 'returns particular rate' do
-      expect_d(subject.rate(:GBP)).to eq "33.36698"
+      expect_d(subject.rate(:GBP)).to eq "33.3669827"
     end
 
     it 'counts a valid ratio' do
-      expect_d(subject.ratio(:GBP, :AMD)).to eq "0.471239701379005776421787678"
+      expect_d(subject.ratio(:GBP, :AMD)).to eq "0.4712398"
     end
 
     it 'converts value from one currecy to another' do
-      expect_d(subject.convert(100, :GBP, :AMD)).to eq "212.206229032414680621"
+      expect_d(subject.convert(100, :GBP, :AMD)).to eq "212.2061846"
+    end
+
+    it 'converts multiple rates' do
+      expect(subject.convert_multi_s(100, :GBP, [:AMD, :RUR, :GBP])).to eq ["212.2061846", "2.9969746", "100.0"]
     end
   end
 
