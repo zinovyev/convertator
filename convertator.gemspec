@@ -1,4 +1,5 @@
 # coding: utf-8
+
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'convertator/version'
@@ -9,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Ivan Zinovyev']
   spec.email         = ['vanyazin@gmail.com']
 
-  spec.summary       = %q{Simple currency converter}
-  spec.homepage      = "https://github.com/zinovyev/convertator"
+  spec.summary       = 'Simple currency converter'
+  spec.homepage      = 'https://github.com/zinovyev/convertator'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|

@@ -13,13 +13,14 @@ module Convertator
     end
 
     def rates
-      rates ||= @provider.new_rates
+      @provider.new_rates
     end
 
     def rate(currency)
       currency = normalize_currency(currency)
-      raise UnknownCurrencyError, "Currency #{currency} is unknown" unless rates[currency]
-      round(BigDecimal.new(rates[currency], @accuracy))
+      rate = rates[currency]
+      raise UnknownCurrencyError, "Unknown currency #{currency}" unless rate
+      round(BigDecimal.new(rate, @accuracy))
     end
 
     def ratio(currency_from, currency_to)
