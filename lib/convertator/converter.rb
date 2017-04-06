@@ -11,14 +11,12 @@ module Convertator
       @provider = load_provider(provider)
       @accuracy = accuracy
       @chain = [] << @provider
-      if block_given?
-        yield(self)
-      end
+      yield(self) if block_given?
     end
 
     def add(middleware)
       middleware.prev = @chain.last
-      @chain << middleware 
+      @chain << middleware
     end
 
     def rates
@@ -58,9 +56,7 @@ module Convertator
 
     private
 
-    def call_middlewares
-
-    end
+    def call_middlewares; end
 
     def round(value)
       BigDecimal.save_rounding_mode do
