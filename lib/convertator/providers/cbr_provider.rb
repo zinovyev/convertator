@@ -4,9 +4,9 @@ require 'rexml/document'
 module Convertator
   module Providers
     class CbrProvider
-      SERVICE_URI = 'http://www.cbr.ru/scripts/xml_daily.asp'
+      SERVICE_URI = 'http://www.cbr.ru/scripts/xml_daily.asp'.freeze
 
-      def new_rates 
+      def new_rates
         default_rates.merge parse(fetch)
       end
 
@@ -14,7 +14,7 @@ module Convertator
 
       def default_rates
         {
-          RUB: "1",
+          RUB: '1'
         }
       end
 
@@ -31,7 +31,7 @@ module Convertator
 
       def fetch
         uri = URI(SERVICE_URI)
-        ::Net::HTTP.get(uri) 
+        ::Net::HTTP.get(uri)
       end
     end
   end

@@ -13,28 +13,48 @@ module Convertator
     end
 
     def rates
-      rates ||= @provider.new_rates
+      @provider.new_rates
     end
 
     def rate(currency)
       currency = normalize_currency(currency)
-      raise UnknownCurrencyError unless rates[currency]
-      BigDecimal.new(rates[currency], @accuracy)
+      rate = rates[currency]
+      raise UnknownCurrencyError, "Unknown currency #{currency}" unless rate
+      round(BigDecimal.new(rate, @accuracy))
     end
 
     def ratio(currency_from, currency_to)
-      rate(currency_from) / rate(currency_to)
+      round(rate(currency_from) / rate(currency_to))
     end
 
     def convert(amount, currency_from, currency_to)
-      amount / ratio(currency_from, currency_to)
+      round(amount / ratio(currency_from, currency_to))
     end
 
-    def convert_digits(amount, currency_from, currency_to)
-      convert(amount, currency_from, currency_to).to_digits
+    def convert_s(amount, currency_from, currency_to)
+      round(convert(amount, currency_from, currency_to)).to_digits
+    end
+
+    def convert_multi(amount, currency_from, currencies_to)
+      currencies_to.map do |currency_to|
+        convert(amount, currency_from, currency_to)
+      end
+    end
+
+    def convert_multi_s(amount, currency_from, currencies_to)
+      currencies_to.map do |currency_to|
+        convert_s(amount, currency_from, currency_to)
+      end
     end
 
     private
+
+    def round(value)
+      BigDecimal.save_rounding_mode do
+        BigDecimal.mode(BigDecimal::ROUND_MODE, :half_up)
+        value.round(@accuracy)
+      end
+    end
 
     def load_provider(name)
       try_require(name)
