@@ -38,12 +38,12 @@ RSpec.describe Convertator::Converter do
     end
 
     it 'converts value from one currecy to another' do
-      expect_d(subject.convert(100, :GBP, :AMD)).to eq '212.2061846'
+      expect_d(subject.convert(100, :GBP, :AMD)).to eq '47.12398'
     end
 
     it 'converts multiple rates' do
       expect(subject.convert_multi_s(100, :GBP, %i[AMD RUR GBP])).to eq(
-        ['212.2061846', '2.9969746', '100.0']
+        ["47.12398", "3336.69827", "100.0"]
       )
     end
   end
