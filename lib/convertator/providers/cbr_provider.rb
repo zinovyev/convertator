@@ -3,10 +3,10 @@ require 'rexml/document'
 
 module Convertator
   module Providers
-    class CbrProvider
+    class CbrProvider < Middleware
       SERVICE_URI = 'http://www.cbr.ru/scripts/xml_daily.asp'.freeze
 
-      def new_rates
+      def call
         default_rates.merge parse(fetch)
       end
 

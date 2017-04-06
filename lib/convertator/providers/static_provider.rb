@@ -1,14 +1,10 @@
 module Convertator
   module Providers
-    class StaticProvider < BaseProvider
+    class StaticProvider < Middleware
       attr_writer :rates
 
-      def initialize
-        @rates = {}
-      end
-
-      def new_rates
-        @rates
+      def call
+        @rates || {}
       end
     end
   end
