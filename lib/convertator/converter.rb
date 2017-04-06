@@ -10,10 +10,19 @@ module Convertator
     def initialize(provider = :cbr, accuracy = 10)
       @provider = load_provider(provider)
       @accuracy = accuracy
+      @chain = [] << @provider
+      if block_given?
+        yield(self)
+      end
+    end
+
+    def add(middleware)
+      middleware.prev = @chain.last
+      @chain << middleware 
     end
 
     def rates
-      @provider.new_rates
+      @chain.last.call
     end
 
     def rate(currency)
@@ -48,6 +57,10 @@ module Convertator
     end
 
     private
+
+    def call_middlewares
+
+    end
 
     def round(value)
       BigDecimal.save_rounding_mode do
