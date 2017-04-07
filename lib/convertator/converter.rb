@@ -1,9 +1,13 @@
 require 'bigdecimal'
 require 'bigdecimal/util'
+require 'convertator/utils'
+require 'convertator/middleware'
 
 module Convertator
   class Converter
     class UnknownCurrencyError < StandardError; end
+
+    include Convertator::Utils
 
     attr_reader :provider
 
@@ -55,16 +59,6 @@ module Convertator
     end
 
     private
-
-    def symbolize_keys(array)
-      array.each_with_object({}) do |(k, v), memo|
-        memo[normalize_currency(k)] = v
-      end
-    end
-
-    def normalize_currency(currency)
-      currency.to_sym.upcase
-    end
 
     def round(value)
       BigDecimal.save_rounding_mode do

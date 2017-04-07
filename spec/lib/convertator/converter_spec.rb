@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'convertator/converter'
 require 'convertator/middleware'
 require 'convertator/providers/static_provider'
+require 'convertator/utils'
 
 RSpec.describe Convertator::Converter do
   def expect_d(value)
